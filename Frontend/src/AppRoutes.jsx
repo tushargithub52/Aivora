@@ -17,13 +17,6 @@ const AppRoutes = () => {
     }
   }, []);
 
-  //toggle theme and save preference to localStorage
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  };
-
   return (
     <BrowserRouter>
       <Routes>
