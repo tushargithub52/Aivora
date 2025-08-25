@@ -1,0 +1,34 @@
+.cta-banner {
+  padding: var(--spacing-xl) 0;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  color: white;
+}
+
+.cta-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.cta-content h2 {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.cta-content p {
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.9;
+}
+
+.cta-banner .cta-button {
+  background: white;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  padding: var(--spacing-md) var(--spacing-xl);
+}
+
+.cta-banner .cta-button:hover {
+  background: rgba(255, 255, 255, 0.9);
+}

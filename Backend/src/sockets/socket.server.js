@@ -7,7 +7,13 @@ const messageModel = require("../models/message.model");
 const { createMemory, queryMemory } = require("../services/vector.service");
 
 async function initSocketServer(httpServer) {
-  const io = new Server(httpServer, {});
+  const io = new Server(httpServer, {
+    cors: {
+      origin: "http://localhost:5173",
+      credentials: true,
+      allowedHeaders: [ "Content-Type", "Authorization" ],
+    }
+  });
 
   // Middlware to ensure that the socket connection is established only for authenticated users
   io.use(async (socket, next) => {
@@ -32,6 +38,7 @@ async function initSocketServer(httpServer) {
   });
 
   io.on("connection", (socket) => {
+    // console.log(`User connected: ${socket.user.email}`);
     socket.on("user-message", async (messagePayload) => {
       /*
       messagePayload: {
@@ -39,6 +46,7 @@ async function initSocketServer(httpServer) {
         content: "user message"
       }
       */
+    //  console.log("Message payload received:", messagePayload);
 
       const [message, vectors] = await Promise.all([
         //store user message in mongodb

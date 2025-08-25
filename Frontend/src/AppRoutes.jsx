@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import { useState, useEffect } from 'react';
 import ThemeToggle from './components/ThemeToggle';
+import Chat from './pages/Chat';
 
 const AppRoutes = () => {
   const [isDark, setIsDark] = useState(true);
@@ -31,6 +32,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </BrowserRouter>
   )
