@@ -136,32 +136,35 @@
 }
 
 .chat-welcome h1 {
-    font-size: 2.75rem;
-    font-weight: 600;
+    font-size: 3.5rem;
+    font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
-    background: linear-gradient(90deg, #fafafa, #5a5a5a);
+    font-family: var(--font-display);
+    background: var(--accent-gradient);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    text-shadow: 0 0 30px var(--glow-color);
 }
 
 .chat-welcome p {
     margin: 0;
-    font-size: 0.95rem;
-    color: #6a6a6a;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
     max-width: 420px;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .chat-welcome .chip {
-    background: #111;
-    border: 1px solid #1f1f1f;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
     padding: 6px 14px;
     border-radius: 999px;
     font-size: 0.75rem;
     font-weight: 500;
-    color: #b5b5b5;
+    color: var(--text-secondary);
+    backdrop-filter: blur(10px);
 }
 
 /* Scrollbar minimal styling (webkit) */

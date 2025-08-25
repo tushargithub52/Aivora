@@ -7,8 +7,7 @@ const ChatSidebar = ({ chats, activeChatId, onSelectChat, onNewChat, open }) => 
   return (
     <aside className={"chat-sidebar " + (open ? 'open' : '')} aria-label="Previous chats">
       <div className="sidebar-header">
-        <h2>Chats</h2>
-        <button className="small-btn" onClick={onNewChat}>New</button>
+        <button className="new-chat-button" onClick={onNewChat}>New Chat</button>
       </div>
       <nav className="chat-list" aria-live="polite">
         {chats.map(c => (

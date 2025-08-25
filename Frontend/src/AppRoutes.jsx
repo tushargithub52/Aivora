@@ -3,7 +3,6 @@ import Landing from './components/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { useState, useEffect } from 'react';
-import ThemeToggle from './components/ThemeToggle';
 import Chat from './pages/Chat';
 
 const AppRoutes = () => {
@@ -27,7 +26,6 @@ const AppRoutes = () => {
 
   return (
     <BrowserRouter>
-      <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
