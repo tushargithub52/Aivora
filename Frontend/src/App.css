@@ -1,69 +1,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap');
 
-:root {
-  --font-primary: 'Poppins', sans-serif;
-  --font-display: 'Sora', sans-serif;
+:root{
+  --font-primary:'Poppins',sans-serif;
+  --font-display:'Sora',sans-serif;
 
-  /* Shared Colors */
-  --accent-1: #FF7F50;
-  --accent-2: #4A90E2;
-  --accent-3: #6C63FF;
-  --accent-gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+  /* Accents */
+  --accent-1:#FF7F50;
+  --accent-2:#4A90E2;
+  --accent-3:#6C63FF;
+  --accent-gradient:linear-gradient(135deg,var(--accent-1),var(--accent-2),var(--accent-3));
 
-  /* Dark Theme (Default) */
-  --bg-primary: #0A0B0F;
-  --bg-secondary: #12141B;
-  --bg-glass: rgba(18, 20, 27, 0.8);
-  --text-primary: #E5E7EB;
-  --text-secondary: #9CA3AF;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --sidebar-hover: rgba(255, 255, 255, 0.05);
-  --glow-color: rgba(108, 99, 255, 0.5);
-  --shadow-color: rgba(0, 0, 0, 0.2);
-  --scrollbar-color: rgba(255, 255, 255, 0.1);
+  /* Dark (default) */
+  --bg-primary:#0A0B0F;
+  --bg-secondary:#12141B;
+  --bg-glass:rgba(18,20,27,.8);
+  --text-primary:#E5E7EB;
+  --text-secondary:#9CA3AF;
+  --border-color:rgba(255,255,255,.1);
+  --glow-color:rgba(108,99,255,.5);
+  --shadow-color:rgba(0,0,0,.25);
+}
+[data-theme="light"]{
+  --bg-primary:#F9FAFB;
+  --bg-secondary:#FFFFFF;
+  --bg-glass:rgba(255,255,255,.9);
+  --text-primary:#1F2937;
+  --text-secondary:#4B5563;
+  --border-color:rgba(0,0,0,.1);
+  --glow-color:rgba(108,99,255,.25);
+  --shadow-color:rgba(0,0,0,.12);
 }
 
-[data-theme="light"] {
-  --bg-primary: #F9FAFB;
-  --bg-secondary: #FFFFFF;
-  --bg-glass: rgba(255, 255, 255, 0.9);
-  --text-primary: #1F2937;
-  --text-secondary: #4B5563;
-  --border-color: rgba(0, 0, 0, 0.1);
-  --sidebar-hover: rgba(0, 0, 0, 0.05);
-  --glow-color: rgba(108, 99, 255, 0.3);
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --scrollbar-color: rgba(0, 0, 0, 0.1);
+/* Reset */
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0; font-family:var(--font-primary);
+  background:var(--bg-primary); color:var(--text-primary);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden; /* allow vertical scroll */
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Useful global polish */
+::selection{ background: rgba(108,99,255,.35); }
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+button{ font:inherit; cursor:pointer; }
+input,textarea{ font:inherit; color:inherit; }
+
+/* Smooth anchors */
+html{ scroll-behavior:smooth; }
+
+.app{
+  min-height:100vh;
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  transition: background-color .3s ease, color .3s ease;
 }
 
-/* Hide scrollbar for chat input and textareas */
-textarea {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
-}
+/* Scrollbar (webkit only) */
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.12); border-radius:999px; }
+::-webkit-scrollbar-track{ background: transparent; }
 
-textarea::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
-}
+/* Hide textarea scrollbar but keep scrollability */
+textarea{ -ms-overflow-style:none; scrollbar-width:none; }
+textarea::-webkit-scrollbar{ display:none; }
 
-html, body {
-  height: 100%;
-  width: 100%;
-  font-family: var(--font-primary);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  overflow: hidden;
-}
-
-.app {
-  min-height: 100vh;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Focus ring */
+:where(a,button,input,textarea):focus-visible{
+  outline: 2px solid var(--accent-3);
+  outline-offset: 2px;
+  border-radius: 8px;
 }
