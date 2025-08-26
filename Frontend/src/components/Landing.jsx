@@ -29,7 +29,7 @@ export default function Landing({ isAuthenticated }) {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    axios.post("http://localhost:3000/api/auth/logout", {}, { withCredentials: true })
+    axios.post("https://aivora-5ole.onrender.com/api/auth/logout", {}, { withCredentials: true })
       .then(() => {
         toast.success("Logged out successfully");
       })
