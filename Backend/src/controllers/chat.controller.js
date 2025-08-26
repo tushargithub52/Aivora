@@ -55,8 +55,24 @@ async function getMessages(req, res) {
     })
 }
 
+async function deleteChat(req, res) {
+    const user = req.user;
+    const { id } = req.params;
+
+    // Delete all messages associated with the chat
+    await messageModel.deleteMany({ chat: id, user: user._id });
+
+    // Delete the chat
+    await chatModel.deleteOne({ _id: id, user: user._id });
+
+    res.status(200).json({
+        message: 'Chat and associated messages deleted successfully'
+    });
+}
+
 module.exports = {
     createChat,
     getChats,
-    getMessages
+    getMessages,
+    deleteChat
 };
