@@ -26,7 +26,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("Login data:", formData);
-    // console.log(user);
+    console.log(user);
     setSubmitting(true);
 
     // Simulate an API call
