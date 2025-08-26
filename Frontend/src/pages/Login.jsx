@@ -6,10 +6,6 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loginSuccess,
-  loginStart,
-  loginFailure,
-  logout,
-  clearError,
 } from "../store/slices/userSlice";
 
 const Login = () => {

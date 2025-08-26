@@ -64,7 +64,7 @@ export default function Landing({ isAuthenticated }) {
             ) : (
               <button 
                 onClick={handleLogout} 
-                className="btn ghost"
+                className="btn primary"
               >
                 Logout
               </button>
