@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/slices/userSlice";
 import "./Landing.css";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 
 const FeatureCard = ({ icon, title, desc }) => (
@@ -21,7 +25,20 @@ const ValueCard = ({ icon, title, desc }) => (
   </div>
 );
 
-export default function Landing() {
+export default function Landing({ isAuthenticated }) {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    axios.post("http://localhost:3000/api/auth/logout", {}, { withCredentials: true })
+      .then(() => {
+        toast.success("Logged out successfully");
+      })
+      .catch((err) => { 
+        toast.error("Logout error:", err);
+      });
+    dispatch(logout());
+  }
+
   return (
     <div className="landing">
       {/* ======= NAV ======= */}
@@ -39,8 +56,19 @@ export default function Landing() {
           </button>
 
           <div className="nav-cta">
-            <Link to="/login" className="btn ghost">Log in</Link>
-            <Link to="/register" className="btn primary">Register now</Link>
+            {!isAuthenticated ? (
+              <>
+                <Link to="/login" className="btn ghost">Log in</Link>
+                <Link to="/register" className="btn primary">Register now</Link>
+              </>
+            ) : (
+              <button 
+                onClick={handleLogout} 
+                className="btn ghost"
+              >
+                Logout
+              </button>
+            )}
           </div>
         </nav>
       </header>
@@ -58,7 +86,7 @@ export default function Landing() {
           </p>
 
           <div className="hero-actions">
-            <Link to="/login" className="btn primary btn-lg">Chat now</Link>
+            <Link to="/chat" className="btn primary btn-lg">Chat now</Link>
             <a href="#features" className="btn ghost btn-lg">See features</a>
           </div>
 
@@ -73,7 +101,7 @@ export default function Landing() {
             <div className="chat-header">
               <span className="dot live" />
               <span>Aivora · Live</span>
-              <span className="chip">Secure</span>
+              <span className="secure">Secure</span>
             </div>
 
             <div className="chat-body">

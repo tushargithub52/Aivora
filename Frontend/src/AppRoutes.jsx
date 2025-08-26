@@ -1,14 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Landing from './components/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { useState, useEffect } from 'react';
 import Chat from './pages/Chat';
+import NotFound from './pages/NotFound';
+import AuthWrapper from './components/auth/AuthWrapper';
 
 const AppRoutes = () => {
   const [isDark, setIsDark] = useState(true);
+  const { isAuthenticated } = useSelector((state) => state.user);
 
-  //check for saved theme in localStorage
+  // check for saved theme in localStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
@@ -20,10 +24,18 @@ const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<Landing isAuthenticated={isAuthenticated} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/chat" element={<Chat />} />
+        <Route 
+          path="/chat/*" 
+          element={
+            <AuthWrapper>
+              <Chat />
+            </AuthWrapper>
+          } 
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )

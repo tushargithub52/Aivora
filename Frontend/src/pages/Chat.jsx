@@ -14,7 +14,7 @@ import {
   sendingStarted,
   sendingFinished,
   setChats
-} from '../redux/chatSlice.js';
+} from '../store/slices/chatSlice.js';
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -131,9 +131,9 @@ return (
     <main className="chat-main" role="main">
       {messages.length === 0 && (
         <div className="chat-welcome" aria-hidden="true">
-          <div className="chip">Early Preview</div>
-          <h1>Aivora</h1>
-          <p>Ask. Learn. Create. All in one conversation.</p>
+          <div className="chip">Aivora AI Assistant</div>
+          <h1>Welcome Back</h1>
+          <p>Start a new conversation or continue where you left off</p>
         </div>
       )}
       <ChatMessages messages={messages} isSending={isSending} />

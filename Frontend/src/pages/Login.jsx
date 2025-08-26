@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Auth.css";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginSuccess,
+  loginStart,
+  loginFailure,
+  logout,
+  clearError,
+} from "../store/slices/userSlice";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,10 +19,14 @@ const Login = () => {
   });
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login data:", formData);
+    // console.log("Login data:", formData);
+    // console.log(user);
     setSubmitting(true);
 
     // Simulate an API call
@@ -30,8 +42,11 @@ const Login = () => {
         }
       )
       .then((res) => {
-        toast.success("Logged in successfully!");
+        // console.log(res.data.user);
+        dispatch(loginSuccess(res.data.user));
+        // console.log(user);
         navigate("/");
+        toast.success("Logged in successfully!");
       })
       .catch((err) => {
         if (err.response && err.response.data && err.response.data.message) {
@@ -50,7 +65,7 @@ const Login = () => {
       <div className="auth-card">
         <div className="auth-header">
           <h2>Welcome Back</h2>
-          <p>Log in to continue to Aivora</p>
+          <p>Log in to continue with Aivora</p>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
