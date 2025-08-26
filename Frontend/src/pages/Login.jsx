@@ -8,7 +8,7 @@ import {
   loginSuccess,
 } from "../store/slices/userSlice";
 
-const Login = () => {
+const Login = ({ isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,6 +18,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();

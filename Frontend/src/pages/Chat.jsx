@@ -15,6 +15,7 @@ import {
   sendingFinished,
   setChats
 } from '../store/slices/chatSlice.js';
+import toast from 'react-hot-toast';
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -110,6 +111,28 @@ const Chat = () => {
 
   }
 
+  //delete chat
+  const handleDeleteChat = async (chatId) => {
+    if (!window.confirm("Are you sure you want to delete this chat? This action cannot be undone.")) {
+      return;
+    }
+
+    try {
+      await axios.delete(`http://localhost:3000/api/chat/${chatId}`, { withCredentials: true });
+      // Remove the deleted chat from the state
+      const updatedChats = chats.filter(chat => chat._id !== chatId);
+      dispatch(setChats(updatedChats));
+
+      // If the deleted chat was the active one, clear messages and activeChatId
+      if (chatId === activeChatId) {
+        setMessages([]);
+        dispatch(selectChat(null));
+      }
+    } catch (error) {
+      toast.error("Error deleting chat:", error);
+      toast.error("Failed to delete chat. Please try again.");
+    }
+  };
 
 return (
   <div className="chat-layout minimal">
@@ -126,6 +149,7 @@ return (
         getMessages(id);
       }}
       onNewChat={handleNewChat}
+      onDeleteChat={handleDeleteChat}
       open={sidebarOpen}
     />
     <main className="chat-main" role="main">

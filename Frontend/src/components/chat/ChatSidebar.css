@@ -74,6 +74,13 @@
   border-radius: 4px;
 }
 
+.chat-item-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .chat-list-item {
   text-align: left;
   background: transparent;
@@ -89,6 +96,34 @@
   position: relative;
   transition: all 0.2s ease;
   font-size: 0.9375rem;
+  flex-grow: 1;
+}
+
+.delete-chat-button {
+  opacity: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.delete-chat-button:hover {
+  background: var(--bg-glass);
+  color: var(--danger-color, #ff4444);
+}
+
+.chat-item-wrapper:hover .delete-chat-button {
+  opacity: 1;
 }
 .chat-list-item.active {
   background-color: var(--bg-glass);

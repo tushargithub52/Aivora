@@ -25,8 +25,8 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing isAuthenticated={isAuthenticated} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login isAuthenticated={isAuthenticated} />} />
+        <Route path="/register" element={<Register isAuthenticated={isAuthenticated} />} />
         <Route 
           path="/chat/*" 
           element={

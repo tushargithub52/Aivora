@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Auth.css";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const Register = () => {
+const Register = ({isAuthenticated}) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -13,6 +13,12 @@ const Register = () => {
   });
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/chat");
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
