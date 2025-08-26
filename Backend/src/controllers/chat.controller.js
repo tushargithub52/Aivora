@@ -37,22 +37,33 @@ async function getChats(req, res) {
     })
 }
 
+// In src/controllers/chat.controller.js
+
 async function getMessages(req, res) {
     const user = req.user;
     const { id } = req.params;
 
-    // console.log(req.params.id);
+    // --- SOLUTION ---
+    // Add this validation check at the top
+    if (!id || id === 'undefined') {
+        return res.status(400).json({ message: 'Chat ID is required.' });
+    }
+    // --- END SOLUTION ---
 
-    const messages = await messageModel.find({ chat: id, user: user._id }).sort({ createdAt: 1 });
-    
-    // if (!messages) {
-    //     return res.status(404).json({ message: 'Chat not found' });
-    // }
+    try {
+        const messages = await messageModel.find({ chat: id, user: user._id }).sort({ createdAt: 1 });
 
-    res.status(200).json({
-        message: 'Messages fetched successfully',
-        messages: messages
-    })
+        res.status(200).json({
+            message: 'Messages fetched successfully',
+            messages: messages
+        });
+    } catch (error) {
+        // Handle potential cast errors if an invalid ID format is still passed
+        if (error.name === 'CastError') {
+            return res.status(400).json({ message: 'Invalid Chat ID format.' });
+        }
+        res.status(500).json({ message: 'Server error fetching messages.' });
+    }
 }
 
 async function deleteChat(req, res) {
