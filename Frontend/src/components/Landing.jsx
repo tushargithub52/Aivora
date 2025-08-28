@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "../store/slices/userSlice";
+import { logoutUser } from "../store/slices/userSlice";
 import "./Landing.css";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -29,14 +29,13 @@ export default function Landing({ isAuthenticated }) {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    axios.post("https://aivora-5ole.onrender.com/api/auth/logout", {}, { withCredentials: true })
+    dispatch(logoutUser())
       .then(() => {
         toast.success("Logged out successfully");
       })
-      .catch((err) => { 
+      .catch((err) => {
         toast.error("Logout error:", err);
       });
-    dispatch(logout());
   }
 
   return (

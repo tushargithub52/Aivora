@@ -27,13 +27,13 @@ const Login = ({ isAuthenticated }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("Login data:", formData);
-    console.log(user);
+    // console.log(user);
     setSubmitting(true);
 
     // Simulate an API call
     axios
       .post(
-        "https://aivora-5ole.onrender.com/api/auth/login",
+        "http://localhost:3000/api/auth/login",
         {
           email: formData.email,
           password: formData.password,

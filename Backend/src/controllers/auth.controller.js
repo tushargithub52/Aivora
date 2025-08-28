@@ -67,8 +67,25 @@ async function logoutUser(req, res) {
     res.status(200).json({ message: 'User logged out successfully' });
 };
 
+async function getCurrentUser(req, res) {
+    const token = req.cookies.token;
+
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await userModel.findById(decoded.id);
+        res.status(200).json({ user });
+    } catch (error) {
+        res.status(401).json({ message: 'Unauthorized' });
+    }
+}
+
 module.exports = {
     registerUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    getCurrentUser
 }

@@ -28,7 +28,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login isAuthenticated={isAuthenticated} />} />
         <Route path="/register" element={<Register isAuthenticated={isAuthenticated} />} />
         <Route 
-          path="/chat/*" 
+          path="/chat" 
           element={
             <AuthWrapper>
               <Chat />

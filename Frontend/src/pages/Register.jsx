@@ -27,7 +27,7 @@ const Register = ({isAuthenticated}) => {
     //api call
     axios
       .post(
-        "https://aivora-5ole.onrender.com/api/auth/register",
+        "http://localhost:3000/api/auth/register",
         {
           email: formData.email,
           fullName: {
