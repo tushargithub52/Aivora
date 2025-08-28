@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../store/slices/userSlice';
 import './ChatSidebar.css';
 
-
 const ChatSidebar = ({ chats, activeChatId, onSelectChat, onNewChat, onDeleteChat, open }) => {
+  const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    await dispatch(logoutUser());
+    navigate('/'); // Redirect to home page after logout
+  };
+
+  const handleHome = () => {
+    navigate('/');
+  };
   
   return (
     <aside className={"chat-sidebar " + (open ? 'open' : '')} aria-label="Previous chats">
       <div className="sidebar-header">
         <button className="new-chat-button" onClick={onNewChat}>New Chat</button>
+        <div className="sidebar-menu">
+          <button className="menu-button" onClick={handleHome}>Home</button>
+          <button className="menu-button" onClick={handleLogout}>Logout</button>
+        </div>
       </div>
       <nav className="chat-list" aria-live="polite">
         {chats.map(c => (

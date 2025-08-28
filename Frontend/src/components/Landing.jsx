@@ -5,6 +5,8 @@ import { logoutUser } from "../store/slices/userSlice";
 import "./Landing.css";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import { useEffect } from "react";
 
 
 const FeatureCard = ({ icon, title, desc }) => (
@@ -27,8 +29,32 @@ const ValueCard = ({ icon, title, desc }) => (
 
 export default function Landing({ isAuthenticated }) {
   const dispatch = useDispatch();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMobileMenuOpen && !event.target.closest('.mobile-menu')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    // Toggle body scroll
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
   const handleLogout = () => {
+    setIsMobileMenuOpen(false); // Close mobile menu after logout
     dispatch(logoutUser())
       .then(() => {
         toast.success("Logged out successfully");
@@ -48,13 +74,44 @@ export default function Landing({ isAuthenticated }) {
             Aivora
           </a>
 
-          <button className="nav-toggle" aria-label="Open menu">
-            <span />
-            <span />
-            <span />
-          </button>
+          <div className="mobile-menu">
+            <button 
+              className={`nav-toggle ${isMobileMenuOpen ? 'active' : ''}`}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+            
+            <div className={`nav-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+              <button 
+                className="close-btn"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ×
+              </button>
+              <div className="nav-cta mobile">
+                {!isAuthenticated ? (
+                  <>
+                    <Link to="/login" className="btn ghost">Log in</Link>
+                    <Link to="/register" className="btn primary">Register now</Link>
+                  </>
+                ) : (
+                  <button 
+                    onClick={handleLogout} 
+                    className="btn primary"
+                  >
+                    Logout
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
 
-          <div className="nav-cta">
+          <div className="nav-cta desktop">
             {!isAuthenticated ? (
               <>
                 <Link to="/login" className="btn ghost">Log in</Link>
