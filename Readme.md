@@ -1,4 +1,4 @@
-# Aivora - Next-gen Conversational AI
+# Aivora - Conversational AI with Real-time Memory
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-brightgreen?logo=render&logoColor=white)](https://aivora-5ole.onrender.com/)
 [![React](https://img.shields.io/badge/React-18-20232A?logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -7,7 +7,18 @@
 [![Socket.io](https://img.shields.io/badge/Socket.io-010101?logo=socketdotio&logoColor=white)](https://socket.io/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 
-Aivora is a cutting-edge conversational AI platform designed for seamless, intelligent interactions. Built with advanced features like long-term memory via vector databases and real-time chat capabilities, Aivora delivers fast, secure, and reliable AI conversations available 24/7 for teams and creators.
+Aivora is a full-stack conversational AI platform built for smooth, intelligent, and real-time interactions.
+Unlike basic chatbot clones, Aivora supports:
+
+🔹 Secure authentication
+
+🔹 Real-time chat with Socket.io
+
+🔹 Context retention via Pinecone vector memory
+
+🔹 Gemini AI-powered responses
+
+Whether you’re a student, developer, or creator, Aivora demonstrates how AI-driven apps can be built with scalable architecture, persistent memory, and a modern UI.
 
 ![Aivora Interface](./Frontend/public/logo.png)
 

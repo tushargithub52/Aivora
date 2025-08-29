@@ -132,13 +132,12 @@ export default function Landing({ isAuthenticated }) {
       {/* ======= HERO ======= */}
       <section className="hero" id="top">
         <div className="hero-col hero-copy">
-          <span className="tag">Next-gen Conversational AI</span>
+          <span className="tag">Conversational AI with Memory</span>
           <h1>
-            <span className="grad">Revolutionizing AI</span><br />Conversations
+            <span className="grad">AI Conversations</span><br />that Remember
           </h1>
           <p className="lead">
-            Unleash AI's potential with Aivora—designed for seamless, intelligent interactions
-            that are fast, secure, and available 24/7 for teams and creators.
+            Experience AI with context — Aivora enables fast, secure, and intelligent conversations with real-time chat and memory.
           </p>
 
           <div className="hero-actions">
